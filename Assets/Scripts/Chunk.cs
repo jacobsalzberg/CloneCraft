@@ -34,6 +34,7 @@ public class Chunk : MonoBehaviour {
         chunkCollider = GetComponent<MeshCollider>();
 
         CubeTop(0, 0, 0, (byte)TextureType.rock.GetHashCode());
+        UpdateMesh();
 
 	}
 	
