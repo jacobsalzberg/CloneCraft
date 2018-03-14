@@ -30,7 +30,11 @@ public class Chunk : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+        mesh = GetComponent <MeshFilter>().mesh;
+        chunkCollider = GetComponent<MeshCollider>();
+
+        CubeTop(0, 0, 0, (byte)TextureType.rock.GetHashCode());
+
 	}
 	
 	// Update is called once per frame
