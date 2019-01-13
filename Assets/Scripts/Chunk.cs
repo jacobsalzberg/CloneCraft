@@ -7,6 +7,7 @@ public enum TextureType
     air, grass, rock
 }
 
+[RequireComponent(typeof(MeshFilter), typeof(MeshCollider))]
 public class Chunk : MonoBehaviour {
 
 
@@ -43,6 +44,26 @@ public class Chunk : MonoBehaviour {
 		
 	}
 
+    void UpdateMesh()
+    {
+        mesh.Clear();
+        mesh.vertices = newVertices.ToArray();
+        mesh.uv = newUV.ToArray();
+        mesh.triangles = newTriangles.ToArray();
+        mesh.RecalculateNormals();
+
+        chunkCollider.sharedMesh = null;
+        chunkCollider.sharedMesh = mesh;
+        //clear the lists we used
+
+
+        newVertices.Clear();
+        newUV.Clear();
+        newTriangles.Clear();
+        faceCount = 0;
+
+    }
+
     void CubeTop(int x, int y, int z, byte block)
     {
         //adding four points to the array
@@ -70,20 +91,6 @@ public class Chunk : MonoBehaviour {
     }
 
     //Refreshes the display, clear out arrays,etc
-    void UpdateMesh()
-    {
-        mesh.Clear();
-        mesh.vertices = newVertices.ToArray();
-        mesh.uv = newUV.ToArray();
-        mesh.triangles = newTriangles.ToArray();
-        mesh.RecalculateNormals();
-
-        //clear the lists we used
-        newVertices.Clear();
-        newUV.Clear();
-        newTriangles.Clear();
-        faceCount = 0;
-
-    }
+ 
 
 }
